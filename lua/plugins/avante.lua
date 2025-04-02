@@ -21,15 +21,17 @@ return {
     },
     config = function()
       require("avante").setup({
-        provider = "openai",
-        auto_suggestions_provider = "openai",
-        -- Since auto-suggestions are a high-frequency operation and therefore expensive, it is recommended to specify an inexpensive provider or even a free provider: copilot
-        claude = {
-          endpoint = "https://openrouter.ai/api/v1/chat/completions",
-          model = "anthropic/claude-3.5-sonnet:beta",
-          temperature = 0,
-          max_tokens = 4096,
+        --provider = "openapi",
+        provider = "openrouter",
+        vendors = {
+          openrouter = {
+            __inherited_from = "openai",
+            endpoint = "https://openrouter.ai/api/v1",
+            api_key_name = "ANTHROPIC_API_KEY",
+            model = "anthropic/claude-3.5-sonnet:beta",
+          },
         },
+        auto_suggestions_provider = "openai",
         dual_boost = {
           enabled = false,
           first_provider = "openai",
